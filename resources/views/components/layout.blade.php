@@ -21,14 +21,6 @@
 </style>
 
 <body>
-    <nav>
-        <div>
-            <a href="/">Home</a>
-            <a href="/about">About Us</a>
-            <a href="/contact">Contact</a>
-        </div>
-    </nav>
-
     <main>
         {{ $slot}}
     </main>
