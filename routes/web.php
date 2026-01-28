@@ -1,12 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Idea;
 
 Route::get('/', function () {
 
-    //get the ideas from session
-    $ideas = session()->get('ideas', []);
-
+    $ideas = Idea::query()
+        ->when(request('state'), function ($query, $state) {
+            $query->where('state', $state);
+        })
+        ->get();
     //send the data to views
     return view('ideas', [
         'ideas' => $ideas
@@ -14,10 +17,13 @@ Route::get('/', function () {
 });
 
 Route::post('/ideas', function () {
+
     $idea = request('idea');
 
-    //store the data from form to session since we don't have db yet
-    session()->push('ideas', $idea);
+    Idea::create([
+        'description' => $idea,
+        'state' => 'pending',
+    ]);
 
     //Go back to home page
     return redirect('/');
