@@ -21,7 +21,7 @@
     }
 </style>
 
-<body class="bg-gray-700 p-6 m-auto max-w-xl">
+<body class="bg-gray-700 p-6 m-auto max-w-xl text-white">
     <main>
         {{ $slot}}
     </main>
